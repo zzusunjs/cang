@@ -1,21 +1,29 @@
-import React, { useState } from "react";
-import BgImg from "@/asserts/imgs/2233background.jpg";
+import React from "react";
+import { Link, HashRouter as Router } from "react-router-dom";
+import CangRouter from "./router";
+
+import "./app.less";
 
 function App() {
-  const [count, setCounts] = useState("");
-  const onChange = (e: any) => {
-    setCounts(e.target.value);
-  };
   return (
-    <>
-      <h2>oooos</h2>
-      <p>受控组件</p>
-      <input type="text" value={count} onChange={onChange} />
-      <br />
-      <p>dddd</p>
-      <input type="text" />
-      <img style={{ width: 400 }} src={BgImg} />
-    </>
+    <Router>
+      <div className="left">
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/users">Users</Link>
+          </li>
+        </ul>
+      </div>
+      <div className="right">
+        <CangRouter />
+      </div>
+    </Router>
   );
 }
 export default App;
