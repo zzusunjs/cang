@@ -1,11 +1,12 @@
 import React from "react";
-import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import { ClockExample } from "../components/index";
 
 export default function CangRouter() {
   return (
     <Switch>
-      <Route path="/about">
-        <About />
+      <Route path="/clock">
+        <ClockExample />
       </Route>
       <Route path="/users">
         <Users />

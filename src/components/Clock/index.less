@@ -1,0 +1,148 @@
+.clock-border-circle {
+  float: left;
+  position: relative;
+  /* position 设置为 relative, 内部元素的 absolute 相对于此定位 */
+  margin: 20px 10px;
+  /* margin-left margin-right 设置为 auto 可以水平居中 */
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  border: solid gray;
+}
+
+.clock-border-square {
+  /* 取消矩形的圆角 */
+  border-radius: 0px;
+}
+
+.clock-border-radius {
+  /* 10% 圆角 */
+  border-radius: 10%;
+}
+
+/* 通过内层的 circle 遮盖表盘中的 6 根线条, 仅仅漏出两端 10px 作为表盘上的刻度 */
+.inner-circle {
+  /* 绝对定位实现 垂直水平居中, 绝对定位, 首先通过 top Left 将 inner-circle 的左上角定位到
+				   父元素的中心位置, 然后通过负的 margin 将元素向左向上移动
+				 */
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  left: 50%;
+  top: 50%;
+  margin: -190px 0 0 -190px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+/* 表盘中心的点, 同样水平垂直居中 */
+.center-circle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 50%;
+  top: 50%;
+  margin: -10px 0 0 -10px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+/* 表盘上刻度的线, 垂直高度占满, 水平居中, 原理类似于上面 */
+.line {
+  position: absolute;
+  width: 8px;
+  height: 100%;
+  left: 50%;
+  margin-left: -4px;
+  background-color: black;
+}
+
+/* 180 / 6 === 30度 6根线通过表盘中心 每次旋转 30度, 与表盘边界共有 12 个交点 */
+.line-30 {
+  transform: rotate(30deg);
+}
+.line-60 {
+  transform: rotate(60deg);
+}
+.line-90 {
+  transform: rotate(90deg);
+}
+.line-120 {
+  transform: rotate(120deg);
+}
+.line-150 {
+  transform: rotate(150deg);
+}
+.line-180 {
+  transform: rotate(180deg);
+}
+
+/* 30度 60度 120度 150度 的线宽度减少, 对应刻度变窄 */
+.line-30,
+.line-60,
+.line-120,
+.line-150 {
+  width: 2px;
+  margin-left: -1px;
+}
+
+.hour-hand {
+  /* 水平居中, 垂直方向移动一倍距离 */
+  /* 将时针移动到 原点并指向 6点 */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 100px;
+  margin: -100px 0 0 -4px;
+
+  border-radius: 5px;
+  background-color: goldenrod;
+  /* 以时针和表盘中心点的交点为圆心转动 153度 */
+  transform-origin: bottom;
+  transform: rotate(153deg);
+}
+
+.minute-hand {
+  /* 水平居中, 垂直方向移动一倍距离 */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 140px;
+  margin: -140px 0 0 -3px;
+  border-radius: 5px;
+  background-color: black;
+  transform-origin: bottom;
+  transform: rotate(311deg);
+}
+
+.second-hand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 160px;
+  margin: -160px 0 0 -1px;
+  background-color: red;
+  transform-origin: bottom;
+}
+
+/* 动画部分 */
+.hour-animation {
+  animation: ticktock 21600s steps(60, end) infinite;
+}
+.minute-animation {
+  animation: ticktock 3600s steps(60, end) infinite;
+}
+/* 秒针动画 60s 执行一次 旋转 360度 一直执行, steps(60, end) 每秒执行一次而不是连续旋转 
+			 60 是时针 分针 秒针运动的次数, 旋转总度数固定是 360度, 旋转次数也固定不变
+			*/
+.second-animation {
+  animation: ticktock 60s steps(60, end) infinite;
+}
+@keyframes ticktock {
+  to {
+    transform: rotate(360deg);
+  }
+}

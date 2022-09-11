@@ -13,7 +13,7 @@ function App() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/clock">ClockExample</Link>
           </li>
           <li>
             <Link to="/users">Users</Link>
